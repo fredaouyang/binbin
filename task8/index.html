@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	#super{
+		
+	}
+	div{
+		height: 250px;
+		box-sizing:border-box;
+		display: flex;
+		border: 1px solid #000;
+		margin: auto;
+	}
+	#cat{
+		height: 200px;
+	}
+	#note{
+		flex-grow:2;
+	}
+	
+	#fish{
+		flex-grow:1;
+	}
+	div>div{
+		margin: 5px;
+		margin-top: 25px;
+		height: 200px;
+	}
+	div>div>div{
+		height: 160px
+	}
+	div>div>div>div{
+		height: 100px;
+		margin-top: 50px;
+
+	}
+	div>div>div>div>div{
+		height: 50px;
+	}
+	</style>
+</head>
+<body>
+	<div id="super">
+	<span>super</span>
+		<div id="cat"><span>cat</span>
+			<div id="apple"><span>apple</span>
+			<div>pear</div>
+			<div>pig</div>
+			<div>cala</div>
+			<div>soccer</div>
+			</div>
+			<div id="phone">phone</div>
+			<div><div><span>book</span></div><div><span>school</span></div></div>
+		</div>
+		<div id="note"><span>note</span>
+		<div><span>human</span>
+		<div><span>code</span></div>
+		<div><span>operate</span></div>
+		<div><span>man</span></div>
+		</div>
+		<div id="program"><span>program</span><div><span>bement</span><div><span>cat</span></div></div>
+		<div ><span>glass</span></div></div>
+		</div>
+		
+		<div id="fish"><span>fish</span></div>
+	</div>
+	<button>深度遍历</button>
+	<button>广度遍历</button>
+</body>
+<script>
+	
+</script>
+</html>

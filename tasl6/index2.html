@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style>
+	div{
+		background-color: #ccc;
+		display: inline-block;
+		margin:20px;
+	}
+</style>
+<body>
+	<textarea id="text" cols="30" rows="10"></textarea>
+	<input type="text" id="search">
+	<input type="button" value="查询" id="btn">
+</body>
+<script>
+var text = document.getElementById("text");
+var btn = document.getElementById("btn");
+var search = document.getElementById("search");
+var searchValue = search.value;
+	// 浏览器兼容的添加事件和移除事件
+	var EventUtil = {
+		//事件触发的元素，添加的事件，事件处理程序
+		addHander:function(element,type,handler){
+			if(element.addEventListener){
+				element.addEventListener(type,handler,false);
+			}else if(element.attachEvent){
+				element.attachEvent("on"+type,handler);
+			}else{
+				element["on"+type] = handler;
+			}
+		},
+		//移除事件
+		 removeHandler:function(element,type,handler){
+			if(element.removeEventListener){
+				element.removeEventListener(type,handler,false);
+			}else if(element.detachEvent){
+				element.detachEvent("on"+type,handler);
+			}else{
+				element["on"+type] = null;			
+			}
+		}
+	}
+
+function render(element){
+	var node = document.createElement("div");
+	node.innerHTML = element;
+	document.body.appendChild(node)
+}
+EventUtil.addHander(btn,"click",function(){
+var string = text.value;
+//将输入的文本按标点符号隔开，放入数组
+var arr = string.split(/[^0-9a-zA-Z\u4e00-\u9fa5]+/g);
+console.log(arr);
+for(var i =0;i<arr.length;i++){
+render(arr[i]);
+//匹配元素
+if(arr[i].indexOf(searchValue)!=-1){
+
+}
+}
+})
+
+</script>
+
+</html>

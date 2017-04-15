@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<ul id="lis">
+		<li>1</li>
+		<li>2</li>
+		<li>3</li>
+		<li>4</li>
+		<li>5</li>
+	</ul>
+	<button id="btn">remove</button>
+</body>
+<script>
+	var lis = document.getElementById("lis");
+	var btn = document.getElementById("btn");
+	btn.onclick=function(){
+		for(var i=lis.children.length-1;i>=0;i--){
+		lis.removeChild(lis.children[i]);
+	}
+	}
+	
+</script>
+</html>

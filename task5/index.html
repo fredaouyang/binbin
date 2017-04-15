@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style>
+ul li{
+	float: left;
+	list-style: none;
+	text-decoration: none;
+	margin: 2px;
+	padding: 10px;
+	font-size: 12px;
+	text-align: center;
+	vertical-align: text-middle;
+	background-color: red;
+}
+</style>
+<body>
+	<input type="text" id="number">
+	<button id="in">加入元素</button>
+	<button id="sort">js中的排序</button>
+	<ul id="que">
+	</ul>
+</body>
+<script>
+	var number = document.getElementById("number");
+	var numberIn = document.getElementById("in");
+	var sort = document.getElementById("sort");
+	var que = document.getElementById("que");
+	var arr=[];
+	var EventUtil={
+		//定义添加事件的方法。兼容
+		addEvent:function(element,type,handler){
+		if(element.addEventListener){
+			element.addEventListener(type,handler,false);
+		}else if (element.attachEvent) {
+			element.attachEvent("on"+type,handler);
+		}else{
+			element["on"+type]=handler;
+		};
+	}
+	};
+	EventUtil.addEvent(numberIn,"click",function(){
+		if(arr.length>=60){
+			alert("添加的数字个数不超过60个");
+			return;
+		};
+		if(number.value>=10&&number.value<=100){
+			console.log(number.value);
+		var newElement = document.createElement("li");
+		newElement.innerHTML = number.value;
+		arr.push(number.value);
+		newElement.style.height = number.value+"px";
+			que.appendChild(newElement);
+		}
+		else{
+			console.log(number.value);
+			alert("the number must be 10-100");
+		};
+		
+	})	
+	//使用js中自带的对数组排序的方法sort对数组进行排序
+	EventUtil.addEvent(sort,"click",function(){
+		arr.sort(function compare(num1,num2){
+			return num1-num2;
+		})
+		//先删除所有元素,从后向前删除
+		var lis = que.children;
+		for(var i =lis.length-1;i>=0;i--)
+		{
+			que.removeChild(que.children[i]);
+		}
+		//再进行排序
+		console.log(arr);
+		for(var j=0;j<arr.length;j++){
+			var newElement = document.createElement("li");
+			newElement.innerHTML = arr[j];	
+			newElement.style.height = arr[j]+"px";
+			que.appendChild(newElement);
+		}
+	})
+</script>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+
+	#tree{
+		width: 900px;
+		height: 300px;
+		margin:100px auto;
+	}
+	div{
+		display: flex;
+		justify-content:space-between;
+		border: 1px solid #000;
+		margin: 10px;
+		flex-grow:1;
+		box-sizing:border-box;
+		padding:20px;
+
+	}
+	div>div{
+	
+	height: 250px;
+	}
+	div>div>div{
+
+	height: 180px;
+	}
+	div>div>div>div{
+
+	height: 100px;
+	}
+	#btn-wrap{
+		width: 300px;
+		margin: auto;
+		border: none;
+	}
+	button{
+		
+	}
+	.blue{
+		background-color:skyblue;
+	}
+	</style>
+</head>
+<body>
+	<div id="tree">
+		<div>
+			<div>
+				<div></div>
+				<div></div>
+			</div>
+			<div>
+				<div></div>
+				<div></div>
+			</div>
+		</div>
+		<div>
+			<div>
+				<div></div>
+				<div></div>
+			</div>
+			<div>
+				<div></div>
+				<div></div>
+			</div>
+		</div>
+	</div>
+	<div id="btn-wrap">
+		<button id="prev">前序遍历</button>
+		<button id="in">中序遍历</button>
+		<button id="post">后序遍历</button>
+	</div>
+</body>
+<script>
+(function(){
+	var prevbtn = document.getElementById("prev");
+	var Inbtn = document.getElementById("in");
+	var Postbtn = document.getElementById("post");
+	var rootNode = document.getElementById('tree');
+	var childLists = [];
+	var timer = null;
+	//用递归实现先序遍历，先将父元素推入做动画的列表，再递归遍历父元素的左节点
+	function preOrderTraverse(node){		
+		if(node== null)
+			return;
+		childLists.push(node);
+		preOrderTraverse(node.children[0]);
+		preOrderTraverse(node.children[1]);
+		
+	}
+	// 用递归实现中序遍历
+	function InOrderTraverse(node){		
+		if(node== null)
+			return;
+		InOrderTraverse(node.children[0]);
+		childLists.push(node);
+		InOrderTraverse(node.children[1]);
+		
+	}
+	// 用递归实现后序遍历
+	function PostOrderTraverse(node){		
+		if(node== null)
+			return;
+		PostOrderTraverse(node.children[0]);
+		PostOrderTraverse(node.children[1]);
+		childLists.push(node);
+		
+		
+	}
+	//在每次动画开始前，先清除之前的动画效果，使要做动画的元素列表清空
+	function clearColor(){
+		clearInterval(timer);
+		for(var j=0;j<childLists.length;j++){
+			childLists[j].setAttribute("class","");
+		}
+		childLists = [];
+	}
+	function changeColor(){		
+			var i =0;
+			//设置定时器，每隔500ms使childLists中的一个元素改变颜色，并且使其他元素不被父元素所影响
+			 timer = setInterval(function(){
+		 		if(i>childLists.length)
+		 			{
+		 				clearInterval(timer);		 				
+		 			}
+		 		else{
+		 			for(var j =0;j<i;j++){
+		 					childLists[j].setAttribute("class","");
+		 				}
+		 			childLists[i].setAttribute('class',"blue");
+		 		}
+		 		 i++;
+		 	},500)
+			
+		}		
+	prevbtn.onclick = function(){
+		clearColor();
+		preOrderTraverse(rootNode);
+		changeColor();
+	}
+	Inbtn.onclick = function(){
+		clearColor();
+		InOrderTraverse(rootNode);
+		changeColor();
+	}
+	Postbtn.onclick = function(){
+		clearColor();
+		PostOrderTraverse(rootNode);
+		changeColor();
+	}
+})();
+</script>
+</html>
